@@ -16,7 +16,7 @@ export const getOrders = async (_req: Request, res: Response) => {
     const orders = await index();
     res.json(orders);
   } catch (err) {
-    res.status(400);
+    res.status(500);
     if (err instanceof Error) {
       res.json({ error: err?.message ?? 'something went wrong' });
     } else {
@@ -36,7 +36,7 @@ export const getOrder = async (req: Request, res: Response) => {
       res.json({ error: 'id must be a number' });
     }
   } catch (err) {
-    res.status(400);
+    res.status(500);
     if (err instanceof Error) {
       res.json({ error: err?.message ?? 'something went wrong' });
     } else {
@@ -57,7 +57,7 @@ export const createOrder = async (req: Request, res: Response) => {
     res.json(newOrder);
   } catch (err) {
     console.log('err', err);
-    res.status(400);
+    res.status(500);
     if (err instanceof Error) {
       res.json({ error: err?.message ?? 'something went wrong' });
     } else {
@@ -77,7 +77,7 @@ export const deleteOrder = async (req: Request, res: Response) => {
       res.json({ error: 'id must be a number' });
     }
   } catch (err) {
-    res.status(400);
+    res.status(500);
     if (err instanceof Error) {
       res.json({ error: err?.message ?? 'something went wrong' });
     } else {
@@ -96,7 +96,7 @@ export const addOrderProduct = async (req: Request, res: Response) => {
     }
     const ProductId = parseInt(req.body['product-id']);
     if (Number.isNaN(ProductId)) {
-      res.status(400);
+      res.status(500);
       res.json({ error: 'product id must be number' });
       return;
     }
@@ -112,7 +112,7 @@ export const addOrderProduct = async (req: Request, res: Response) => {
     res.json(newOrder);
   } catch (err) {
     console.log('err', err);
-    res.status(400);
+    res.status(500);
     if (err instanceof Error) {
       res.json({ error: err?.message ?? 'something went wrong' });
     } else {
@@ -133,7 +133,7 @@ export const getOrdersByUser = async (req: Request, res: Response) => {
     const order = await showUserOrders(userId);
     res.json(order);
   } catch (err) {
-    res.status(400);
+    res.status(500);
     if (err instanceof Error) {
       res.json({ error: err?.message ?? 'something went wrong' });
     } else {
@@ -153,7 +153,7 @@ export const getCompleteOrdersByUser = async (req: Request, res: Response) => {
     const order = await showUserCompletedOrders(userId);
     res.json(order);
   } catch (err) {
-    res.status(400);
+    res.status(500);
     if (err instanceof Error) {
       res.json({ error: err?.message ?? 'something went wrong' });
     } else {
@@ -174,7 +174,7 @@ export const setOrderAsCompleted = async (req: Request, res: Response) => {
     console.log('order', order);
     res.json(order);
   } catch (err) {
-    res.status(400);
+    res.status(500);
     if (err instanceof Error) {
       res.json({ error: err?.message ?? 'something went wrong' });
     } else {

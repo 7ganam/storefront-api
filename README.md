@@ -1,5 +1,9 @@
 # Storefront Backend Project
 
+## default port
+
+the back end will run on port 3000
+
 ## how to start
 
 - sudo pkill -u postgres #(to make sure you don't have any running postgress process )

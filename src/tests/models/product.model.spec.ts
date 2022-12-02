@@ -1,4 +1,4 @@
-import { ProductStore } from '../product.model';
+import { ProductStore } from '../../models/product.model';
 
 const store = new ProductStore();
 let createdProductId: number;
@@ -33,15 +33,12 @@ describe('Product Model', () => {
   });
 
   it('INDEX method should return a list of products', async () => {
-    const [{ name, price }] = await store.index();
-    expect([{ name, price }]).toEqual([
-      {
-        name: 'shoes',
-        price: 25
-      }
-    ]);
+    const items = await store.index();
+    const names = items.map((item) => item.name);
+    const prices = items.map((item) => item.price);
+    expect(names).toContain('shoes');
+    expect(prices).toContain(25);
   });
-
   it('SHOW method should return a product by product name', async () => {
     const { name, price } = await store.show(createdProductId);
 

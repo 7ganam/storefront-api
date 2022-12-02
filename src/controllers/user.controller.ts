@@ -13,6 +13,11 @@ export const getUsers = async (_req: Request, res: Response) => {
 };
 
 export const registerUser = async (req: Request, res: Response) => {
+  if (!req.body.firstname || !req.body.lastname || !req.body.password) {
+    res.status(400);
+    res.json({ message: 'missing field' });
+    return;
+  }
   try {
     const user: Omit<User, 'id'> = {
       firstname: req.body.firstname as string,

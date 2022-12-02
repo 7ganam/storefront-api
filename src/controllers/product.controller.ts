@@ -28,6 +28,11 @@ export const getProduct = async (req: Request, res: Response) => {
 };
 
 export const createProduct = async (req: Request, res: Response) => {
+  if (!req.body.name || !req.body.price) {
+    res.status(400);
+    res.json({ message: 'name and price are required' });
+    return;
+  }
   try {
     const product: Omit<Product, 'id'> = {
       name: req.body.name as string,

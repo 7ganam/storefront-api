@@ -1,8 +1,8 @@
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
-import { OrderStore } from '../order.model';
-import { User, UserStore } from '../user.model';
-import { ProductStore } from '../product.model';
+import { OrderStore } from '../../models/order.model';
+import { User, UserStore } from '../../models/user.model';
+import { ProductStore } from '../../models/product.model';
 
 dotenv.config();
 const { BCRYPT_SALT_ROUNDS, BCRYPT_PEPPER } = process.env;
@@ -88,8 +88,9 @@ describe('Order Model', () => {
   });
 
   it('SHOW method should return the orders of a user', async () => {
-    const { status, user_id } = await store.show(createdUserId);
+    const result = await store.show(createdOrderId);
 
+    const { status, user_id } = result;
     expect({ status, user_id }).toEqual({
       status: 'active',
       user_id: createdUserId
